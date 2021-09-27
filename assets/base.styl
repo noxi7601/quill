@@ -116,17 +116,17 @@ colorItemsPerRow = 7
 
   .ql-editor
     h1
-      font-size: 2em
+      font-size: 2rem
     h2
-      font-size: 1.5em
+      font-size: 1.75rem
     h3
-      font-size: 1.17em
+      font-size: 1.5rem
     h4
-      font-size: 1em
+      font-size: 1.25rem
     h5
-      font-size: 0.83em
+      font-size: 1rem
     h6
-      font-size: 0.67em
+      font-size: .75rem
     a
       text-decoration: underline
     blockquote
@@ -241,23 +241,23 @@ colorItemsPerRow = 7
     width: 98px
     .ql-picker-label::before,
     .ql-picker-item::before
-      content: 'Normal'
+      content: 'Paragraph'
     for num in (1..6)
       .ql-picker-label[data-value=\"{num}\"]::before,
       .ql-picker-item[data-value=\"{num}\"]::before
         content: 'Heading ' + num
     .ql-picker-item[data-value="1"]::before
-      font-size: 2em
+      font-size: 2rem
     .ql-picker-item[data-value="2"]::before
-      font-size: 1.5em
+      font-size: 1.75rem
     .ql-picker-item[data-value="3"]::before
-      font-size: 1.17em
+      font-size: 1.5rem
     .ql-picker-item[data-value="4"]::before
-      font-size: 1em
+      font-size: 1.25rem
     .ql-picker-item[data-value="5"]::before
-      font-size: 0.83em
+      font-size: 1rem
     .ql-picker-item[data-value="6"]::before
-      font-size: 0.67em
+      font-size: .75rem
 
   .ql-picker.ql-font
     width: 108px
@@ -283,18 +283,28 @@ colorItemsPerRow = 7
     .ql-picker-label[data-value=small]::before,
     .ql-picker-item[data-value=small]::before
       content: 'Small'
-    .ql-picker-label[data-value=large]::before,
-    .ql-picker-item[data-value=large]::before
-      content: 'Large'
+    .ql-picker-label[data-value=large1]::before,
+    .ql-picker-item[data-value=large1]::before
+      content: 'Large 1'
+    .ql-picker-label[data-value=large2]::before,
+    .ql-picker-item[data-value=large2]::before
+      content: 'Large 2'
+    .ql-picker-label[data-value=large3]::before,
+    .ql-picker-item[data-value=large3]::before
+      content: 'Large 3'
     .ql-picker-label[data-value=huge]::before,
     .ql-picker-item[data-value=huge]::before
       content: 'Huge'
     .ql-picker-item[data-value=small]::before
-      font-size: 10px
-    .ql-picker-item[data-value=large]::before
-      font-size: 18px
+      font-size: .75rem
+    .ql-picker-item[data-value=large1]::before
+      font-size: 1.5rem
+    .ql-picker-item[data-value=large2]::before
+      font-size: 2rem
+    .ql-picker-item[data-value=large3]::before
+      font-size: 2.5rem
     .ql-picker-item[data-value=huge]::before
-      font-size: 32px
+      font-size: 3rem
 
   .ql-color-picker.ql-background
     .ql-picker-item

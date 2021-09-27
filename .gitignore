@@ -4,6 +4,7 @@
 /selenium
 /docs/_site
 /src
+package-lock.json
 *.d.ts
 *.log
 

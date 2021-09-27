@@ -21,9 +21,9 @@ const COLORS = [
 
 const FONTS = [ false, 'serif', 'monospace' ];
 
-const HEADERS = [ '1', '2', '3', false ];
+const HEADERS = [ '1', '2', '3', '4', '5', false ];
 
-const SIZES = [ 'small', false, 'large', 'huge' ];
+const SIZES = [ 'small', false, 'large1', 'large2', 'large3', 'huge' ];
 
 
 class BaseTheme extends Theme {

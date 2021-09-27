@@ -1,8 +1,8 @@
 // Styles necessary for Quill
 
 LIST_STYLE = decimal lower-alpha lower-roman
-LIST_STYLE_WIDTH = 1.2em
-LIST_STYLE_MARGIN = 0.3em
+LIST_STYLE_WIDTH = 1.2rem
+LIST_STYLE_MARGIN = 0.3rem
 LIST_STYLE_OUTER_WIDTH = LIST_STYLE_MARGIN + LIST_STYLE_WIDTH
 MAX_INDENT = 9
 
@@ -11,8 +11,6 @@ resets(arr)
 
 .ql-container
   box-sizing: border-box
-  font-family: Helvetica, Arial, sans-serif
-  font-size: 13px
   height: 100%
   margin: 0px
   position: relative
@@ -54,7 +52,7 @@ resets(arr)
     padding: 0
     counter-reset: resets(1..MAX_INDENT)
   ol, ul
-    padding-left: 1.5em
+    padding-left: 1.5rem
   ol > li, ul > li
     list-style-type: none
   ul > li::before
@@ -104,13 +102,13 @@ resets(arr)
           counter-reset: resets((num+1)..MAX_INDENT)
   for num in (1..MAX_INDENT)
     .ql-indent-{num}:not(.ql-direction-rtl)
-      padding-left: (3*num)em
+      padding-left: (2*num)rem
     li.ql-indent-{num}:not(.ql-direction-rtl)
-      padding-left: (3*num + LIST_STYLE_OUTER_WIDTH)em
+      padding-left: (2*num + LIST_STYLE_OUTER_WIDTH)rem
     .ql-indent-{num}.ql-direction-rtl.ql-align-right
-      padding-right: (3*num)em
+      padding-right: (2*num)rem
     li.ql-indent-{num}.ql-direction-rtl.ql-align-right
-      padding-right: (3*num + LIST_STYLE_OUTER_WIDTH)em
+      padding-right: (2*num + LIST_STYLE_OUTER_WIDTH)rem
 
   .ql-video
     display: block
@@ -156,11 +154,15 @@ resets(arr)
     font-family: Monaco, Courier New, monospace
 
   .ql-size-small
-    font-size: 0.75em
-  .ql-size-large
-    font-size: 1.5em
+    font-size: 0.75rem
+  .ql-size-large1
+    font-size: 1.5rem
+  .ql-size-large2
+    font-size: 2rem
+  .ql-size-large3
+    font-size: 2.5rem
   .ql-size-huge
-    font-size: 2.5em
+    font-size: 3rem
 
   .ql-direction-rtl
     direction: rtl

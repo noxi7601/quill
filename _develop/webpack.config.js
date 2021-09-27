@@ -1,7 +1,7 @@
 var path = require('path');
 var pkg = require('../package.json');
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 var bannerPack = new webpack.BannerPlugin({
   banner:
@@ -56,11 +56,6 @@ module.exports = function(env) {
     },
     module: {
       rules: [{
-        test: /\.js$/,
-        use: ['eslint-loader'],
-        include: source,
-        enforce: 'pre'
-      }, {
         test: /\.ts$/,
         use: [{
           loader: 'ts-loader',
@@ -78,13 +73,11 @@ module.exports = function(env) {
         include: [
           path.resolve(__dirname, '../assets')
         ],
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
+        use: [
+            MiniCssExtractPlugin.loader,
             'css-loader',
             'stylus-loader'
-          ]
-        })
+        ]
       }, {
         test: /\.svg$/,
         include: [
@@ -102,7 +95,7 @@ module.exports = function(env) {
         use: [{
           loader: 'babel-loader',
           options: {
-            presets: ['es2015']
+            presets: ['@babel/preset-env']
           }
         }]
       }],
@@ -112,47 +105,15 @@ module.exports = function(env) {
         /\/node_modules\/extend\/index\.js$/
       ]
     },
+    optimization: {
+      minimize: false
+    },
     plugins: [
       bannerPack,
       constantPack,
-      new ExtractTextPlugin({
-        filename: '[name].css',
-        allChunks: true
-      })
-    ],
-    devServer: {
-      contentBase: path.resolve(__dirname, '../dist'),
-      hot: false,
-      port: process.env.npm_package_config_ports_webpack,
-      stats: 'minimal',
-      disableHostCheck: true
-    }
+      new MiniCssExtractPlugin()
+    ]
   };
-
-  if (env && env.dev) {
-    config.module.rules = config.module.rules.slice(1);   // Remove linter
-    config.module.rules[3].use[0].options = {
-      plugins: ['transform-es2015-modules-commonjs']
-    };
-  }
-
-  if (env && env.minimize) {
-    config.entry = {
-      'quill.min.js': './quill.js'
-    };
-    config.plugins.push(
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true
-      })
-    );
-    config.devtool = 'source-map';
-  }
-
-  if (env && env.coverage) {
-    config.module.rules[4].use[0].options = {
-      plugins: ['istanbul', 'transform-es2015-modules-commonjs']
-    };
-  }
 
   return config;
 };
