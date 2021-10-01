@@ -13,15 +13,15 @@
     "modules",
     "themes",
     "ui",
+    "core.js",
+    "quill.js",
     "dist/quill.bubble.css",
     "dist/quill.snow.css",
     "dist/quill.core.css",
     "dist/quill.js",
     "dist/quill.core.js",
-    "dist/quill.min.js.map",
     "dist/quill.min.js",
-    "core.js",
-    "quill.js"
+    "dist/quill.min.js.map"
   ],
   "config": {
     "ports": {
