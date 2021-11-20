@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" type="text/css" href="/dist/quill.snow.css"></link>
+
+<style>
+:root {
+  --bs-body-font-family: 'Nanum Gothic', sans-serif;
+  --bs-body-font-size: 16px;
+}
+
+html {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 16px;
+  height: 100%;
+}
+
+body {
+  margin: 0px;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 8px;
+}
+
+.ql-container {
+  font-size: 1rem;
+}
+
+.ql-editor {
+  padding: 0px;
+}
+
+#quill-container {
+  box-sizing: border-box;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+#quill-toolbar {
+  flex-grow: 0;
+}
+
+#quill-body {
+  flex-grow: 100;
+  border-top: 0px;
+  overflow-y: auto;
+}
+</style>
+
+<script src="/node_modules/react/umd/react.development.js"></script>
+<script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
+
+<script src="/dist/quill.js"></script>
+
+<script>
+function bodyLoad() {
+    const quillBody = document.querySelector("#quill-body");
+    if (quillBody) {
+        class QuillView extends React.Component {
+            constructor() {
+                super();
+
+                this.body = React.createRef();
+
+                // document.addEventListener('selectionchange', () => {
+                //     if (this.control && this.control.root) {
+                //         if (document.activeElement != this.control.root) {
+                //             const selection = this.control.selection;
+                //             selection.restoreRange();
+                //         }
+                //     }
+                // });
+            }
+
+            render() {
+                return React.createElement(
+                    "div", {
+                        ref: this.body
+                    }
+                );
+            }
+
+            componentDidMount() {
+                this.control = new Quill(this.body.current, {
+                    modules: {toolbar: "#quill-toolbar"},
+                    theme: "snow"
+                });
+                this.control.root.innerHTML = "     Hello, world!!!";
+            }
+        }
+        window.quill = ReactDOM.render(React.createElement(QuillView), quillBody);
+
+        const quillContainer = document.querySelector("#quill-container");
+        if (quillContainer) {
+            quillContainer.style.display = "flex";
+        }
+    }
+}
+</script>
+</head>
+<body onload="bodyLoad();">
+<div id="quill-container">
+    <div id="div1" contenteditable="true">Hello, world!!!!!<br><br><br><br><br></div>
+
+    <div id="quill-toolbar">
+        <span class="ql-formats">
+            <select class="ql-size" title="글자 크기"></select>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-bold" title="굵게"></button>
+            <button class="ql-italic" title="기울게"></button>
+            <button class="ql-underline" title="밑줄"></button>
+            <button class="ql-strike" title="취소선"></button>
+        </span>
+        <span class="ql-formats">
+            <select class="ql-color" title="글자 색"></select>
+            <select class="ql-background" title="배경 색"></select>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-script" value="sub" title="아래 첨자"></button>
+            <button class="ql-script" value="super" title="위 첨자"></button>
+        </span>
+        <span class="ql-formats">
+            <select class="ql-header" title="제목 크기"></select>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-list" value="ordered" title="리스트(번호)"></button>
+            <button class="ql-list" value="bullet" title="리스트"></button>
+            <button class="ql-indent" value="-1" title="내어쓰기"></button>
+            <button class="ql-indent" value="+1" title="들여쓰기"></button>
+        </span>
+        <span class="ql-formats">
+            <select class="ql-align" title="정렬"></select>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-clean" title="초기화"></button>
+        </span>
+    </div>
+    <div id="quill-body"></div>
+</div>
+</body>
+</html>

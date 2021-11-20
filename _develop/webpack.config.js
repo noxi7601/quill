@@ -32,6 +32,8 @@ var source = [
 
 module.exports = function(env) {
   let config = {
+    mode: 'development',
+    devtool: 'source-map',
     context: path.resolve(__dirname, '..'),
     entry: {
       'quill.js': ['./quill.js'],
@@ -46,6 +48,7 @@ module.exports = function(env) {
       library: 'Quill',
       libraryExport: 'default',
       libraryTarget: 'umd',
+      sourceMapFilename: '[name].map',
       path: path.resolve(__dirname, '../dist/')
     },
     resolve: {

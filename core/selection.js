@@ -315,6 +315,44 @@ class Selection {
     this.update(source);
   }
 
+  restoreRange() {
+    debug.info('restoreRange');
+
+    if (this.savedRange == null) {
+      return;
+    }
+
+    let [startNode, startOffset, endNode, endOffset] = this.rangeToNative(this.savedRange);
+    if (startNode != null && (this.root.parentNode == null || startNode.parentNode == null || endNode.parentNode == null)) {
+      return;
+    }
+    let selection = document.getSelection();
+    if (selection == null) return;
+    if (startNode != null) {
+      let native = (this.getNativeRange() || {}).native;
+      if (native == null ||
+          startNode !== native.startContainer ||
+          startOffset !== native.startOffset ||
+          endNode !== native.endContainer ||
+          endOffset !== native.endOffset) {
+
+        if (startNode.tagName == "BR") {
+          startOffset = [].indexOf.call(startNode.parentNode.childNodes, startNode);
+          startNode = startNode.parentNode;
+        }
+        if (endNode.tagName == "BR") {
+          endOffset = [].indexOf.call(endNode.parentNode.childNodes, endNode);
+          endNode = endNode.parentNode;
+        }
+        let range = document.createRange();
+        range.setStart(startNode, startOffset);
+        range.setEnd(endNode, endOffset);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+  }
+
   update(source = Emitter.sources.USER) {
     let oldRange = this.lastRange;
     let [lastRange, nativeRange] = this.getRange();
