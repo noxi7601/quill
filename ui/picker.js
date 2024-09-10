@@ -15,8 +15,12 @@ class Picker {
     this.select.style.display = 'none';
     this.select.parentNode.insertBefore(this.container, this.select);
 
-    this.label.addEventListener('mousedown', () => {
+    this.label.addEventListener('mousedown', (event) => {
       this.togglePicker();
+      event.preventDefault();
+    });
+    this.label.addEventListener('mouseup', (event) => {
+      event.preventDefault();
     });
     this.label.addEventListener('keydown', (event) => {
       switch(event.keyCode) {
@@ -55,6 +59,12 @@ class Picker {
     if (option.textContent) {
       item.setAttribute('data-label', option.textContent);
     }
+    item.addEventListener('mousedown', (event) => {
+      event.preventDefault();
+    });
+    item.addEventListener('mouseup', (event) => {
+      event.preventDefault();
+    });
     item.addEventListener('click', () => {
       this.selectItem(item, true);
     });
@@ -139,7 +149,7 @@ class Picker {
 
   selectItem(item, trigger = false) {
     let selected = this.container.querySelector('.ql-selected');
-    if (item === selected) return;
+    //if (item === selected) return;
     if (selected != null) {
       selected.classList.remove('ql-selected');
     }
