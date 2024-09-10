@@ -59,6 +59,7 @@ class Clipboard extends Module {
     super(quill, options);
     this.quill.root.addEventListener('paste', this.onPaste.bind(this));
     this.container = this.quill.addContainer('ql-clipboard');
+    this.container.classList.add('ql-editor');
     this.container.setAttribute('contenteditable', true);
     this.container.setAttribute('tabindex', -1);
     this.matchers = [];
